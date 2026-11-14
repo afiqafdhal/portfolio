@@ -372,17 +372,21 @@ function SocialIcon({ type, size = 19 }) {
 function SafeImage({ src, alt, className = "", fallback }) {
   const [failedSrc, setFailedSrc] = useState(null);
 
-  if (!src || failedSrc === src) {
+  const imageSrc = src?.startsWith("/")
+    ? `${import.meta.env.BASE_URL}${src.slice(1)}`
+    : src;
+
+  if (!imageSrc || failedSrc === imageSrc) {
     return <>{fallback}</>;
   }
 
   return (
     <img
       className={className}
-      src={src}
+      src={imageSrc}
       alt={alt}
       loading="lazy"
-      onError={() => setFailedSrc(src)}
+      onError={() => setFailedSrc(imageSrc)}
     />
   );
 }
