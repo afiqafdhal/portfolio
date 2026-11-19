@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import "./App.css";
-
+import PortfolioLanyard from "./components/PortfolioLanyard";
 // ======================================================
 // AFIQ AFDHAL — ENGINEERING PORTFOLIO
 // Complete App.jsx with interactive lanyard
@@ -19,7 +19,7 @@ const profile = {
   linkedin: "https://www.linkedin.com/in/afiq-afdhal-1318081b6",
   github: "https://github.com/afiqafdhal",
   description:
-    "Mechatronics Engineering graduate with hands-on exposure to manufacturing digitalisation, industrial IoT, automation and computer vision. I develop practical solutions that connect machines, software and data.",
+    "I build practical systems that connect machines, sensors and software — from production monitoring to industrial automation.",
 };
 
 // ======================================================
@@ -35,8 +35,6 @@ const projectSources = [
     title: "Sugihara Grand Industries",
     fullName: "Sugihara Grand Industries Sdn. Bhd.",
     logo: "/logos/sugihara-logo.png",
-    description:
-      "Industrial digital transformation projects involving manufacturing systems, production monitoring, industrial IoT and connected engineering solutions.",
     location: "Port Klang, Selangor",
   },
   {
@@ -75,7 +73,7 @@ const organizationLogos = {
 const projects = [
   {
     id: 1,
-    title: "Industrial Production Monitoring",
+    title: "OEE Monitoring & Smart Checksheet",
     group: "Industrial Projects",
     category: "Industrial Projects",
     type: "Industrial IoT",
@@ -94,6 +92,7 @@ const projects = [
       "Raspberry Pi",
       "MQTT",
       "Node-RED",
+      "InfluxDB",
       "Grafana",
     ],
     image: "/projects/production-monitoring.png",
@@ -107,7 +106,7 @@ const projects = [
   },
   {
     id: 2,
-    title: "SUGIHARA RollFlow — RFID Roll Tracking System",
+    title: "UHF RFID Stock & Roll Monitoring",
     group: "Industrial Projects",
     category: "Industrial Projects",
     type: "RFID & Industrial IoT",
@@ -116,7 +115,7 @@ const projects = [
     featured: false,
     subtitle: "Multi-station material tracking and traceability",
     description:
-      "Developing an industrial RFID-based tracking system to monitor automotive carpet roll movements across production and storage stations. The solution combines UHF RFID readers, Raspberry Pi, Python, React, Node.js APIs and PostgreSQL to support automated roll identification and material traceability.",
+      "Developing an industrial RFID-based tracking system to monitor automotive carpet roll movements across production and storage stations. ",
     challenge:
       "Tracking material roll movement across multiple manufacturing and storage stations requires accurate identification, consistent inventory records and visibility into material status.",
     contribution:
@@ -1303,10 +1302,7 @@ export default function App() {
 
         <section id="home" className="hero container">
           <div className="hero-copy">
-            <div className="hero-status">
-              <span className="status-indicator" />
-              MECHATRONICS · DIGITAL TRANSFORMATION
-            </div>
+           
 
             <h1>
               {profile.firstName}
@@ -1333,7 +1329,7 @@ export default function App() {
 
             <div className="hero-buttons">
               <a className="button button-dark" href="#projects">
-                Explore my work <span>↗</span>
+                View projects <span>↗</span>
               </a>
 
               <a
@@ -1390,17 +1386,6 @@ export default function App() {
                 <SocialIcon type="mail" />
                 <span>Email</span>
               </a>
-
-              <button
-                type="button"
-                className="hero-social-button"
-                onClick={copyEmail}
-              >
-                <span>{emailCopied ? "✓" : "⧉"}</span>
-                <span>
-                  {emailCopied ? "Copied!" : "Copy Email"}
-                </span>
-              </button>
             </div>
 
             <div className="location-line">
@@ -1409,8 +1394,10 @@ export default function App() {
             </div>
           </div>
 
-          {/* ONLY ONE INTERACTIVE LANYARD */}
-          <InteractiveLanyard />
+       {/* ONLY ONE INTERACTIVE LANYARD */}
+<PortfolioLanyard
+  photoUrl={`${import.meta.env.BASE_URL}images/portrait.jpg`}
+/>
         </section>
 
         {/* ======================================================
@@ -1470,7 +1457,6 @@ export default function App() {
             number="01"
             label="ENGINEERING PROJECTS"
             title="Selected projects."
-            subtitle="Explore my industrial and academic engineering projects, technical contributions and technologies."
           />
 
           <div className="project-filters">
@@ -1492,58 +1478,11 @@ export default function App() {
             ))}
           </div>
 
-          <div className="search-toolbar">
-            <label>
-              Search projects
-              <input
-                type="search"
-                placeholder="Search projects, technologies or keywords..."
-                value={search}
-                onChange={(event) =>
-                  setSearch(event.target.value)
-                }
-              />
-            </label>
+        
 
-            <label>
-              Project status
-              <select
-                value={status}
-                onChange={(event) =>
-                  setStatus(event.target.value)
-                }
-              >
-                <option value="All">All statuses</option>
-                <option value="Development">Development</option>
-                <option value="Prototype">Prototype</option>
-              </select>
-            </label>
+         
 
-            <button
-              type="button"
-              className="reset-button"
-              onClick={resetFilters}
-            >
-              Reset ↺
-            </button>
-          </div>
-
-          <div className="project-results-summary">
-            <div>
-              <span>PROJECT EXPLORER</span>
-              <h3>Engineering & technology</h3>
-              <p>
-                Projects organized by workplace and academic origin.
-              </p>
-            </div>
-
-            <strong>
-              {filteredProjects.length}{" "}
-              {filteredProjects.length === 1
-                ? "project"
-                : "projects"}
-            </strong>
-          </div>
+          
 
           {groupedProjects.length === 0 ? (
             <div className="empty-results">
@@ -1709,8 +1648,6 @@ export default function App() {
           <SectionHeader
             number="03"
             label="TECHNICAL SKILLS"
-            title="Engineering toolkit."
-            subtitle="Technical knowledge developed through academic studies, industrial training and hands-on engineering applications."
           />
 
           <div className="skills-grid">
@@ -1747,31 +1684,17 @@ export default function App() {
             <div className="engineering-vision-layout">
               <div className="vision-content">
                 <div className="vision-eyebrow">
-                  WHAT DRIVES MY WORK
                 </div>
 
                 <h2>
-                  Engineering
+                  Bridging
                   <br />
-                  beyond machines.
+                   Physical Systems and Software.
                 </h2>
 
                 <p className="vision-description">
-                  My focus is on connecting physical engineering
-                  systems with modern software and data
-                  technologies. Through industrial IoT, RFID
-                  tracking, production monitoring and intelligent
-                  applications, I aim to develop practical
-                  solutions that improve manufacturing visibility,
-                  efficiency and traceability.
+                 I develop systems that connect industrial equipment with software and real-time data. My work focuses on production monitoring, industrial automation and digital tools that support everyday manufacturing operations.
                 </p>
-
-                <div className="vision-tags">
-                  <span>Industrial IoT</span>
-                  <span>RFID Tracking</span>
-                  <span>Automation</span>
-                  <span>Digital Solutions</span>
-                </div>
               </div>
 
               <div className="vision-diagram">
@@ -1861,46 +1784,6 @@ export default function App() {
                 {profile.location}
               </div>
             </div>
-
-            <aside className="career-panel">
-              <div className="career-panel-top">
-                <span className="career-panel-label">
-                  CAREER INTERESTS
-                </span>
-                <span className="career-panel-symbol">
-                  ↗
-                </span>
-              </div>
-
-              <h3>
-                Connecting engineering
-                <br />
-                with technology.
-              </h3>
-
-              <p>
-                My professional interests focus on bridging
-                physical engineering systems with modern
-                software, connected devices and intelligent
-                manufacturing solutions.
-              </p>
-
-              <div className="career-panel-divider" />
-
-              <div className="career-interest-list">
-                <span>Industrial IoT</span>
-                <span>Automation</span>
-                <span>Digital Transformation</span>
-                <span>Software Integration</span>
-              </div>
-
-              <div className="career-panel-bottom">
-                <span className="career-status-dot" />
-                <span>
-                  ENGINEERING & TECHNOLOGY
-                </span>
-              </div>
-            </aside>
           </div>
         </section>
       </main>
